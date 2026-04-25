@@ -23,6 +23,7 @@ public class AcaoLista {
                 case IMPRIMIR:
                     break;
                 case IMPRIMIR_TODOS:
+                    System.out.println("Imprimindo:");
                     funcoes.ImprimirTodos();
                     break;
                 case ORDENAR:

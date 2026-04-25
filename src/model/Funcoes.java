@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Funcoes {
-    public static ArrayList<Pessoa> listaPessoas = new ArrayList<>();
+    public  ArrayList<Pessoa> listaPessoas = new ArrayList<>();
 
     //Criando pessoas para haver povoamento:
     Pessoa p1 = new Pessoa(
@@ -31,6 +31,11 @@ public class Funcoes {
             "mariana.lima@email.com"
     );
 
+    public Funcoes() {
+        listaPessoas.add(p1);
+        listaPessoas.add(p2);
+        listaPessoas.add(p3);
+    }
     public void execAdicionar(){
         Pessoa novaPessoa = new Pessoa();
         Scanner sc = new Scanner(System.in);

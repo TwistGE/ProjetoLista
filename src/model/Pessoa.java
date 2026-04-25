@@ -69,6 +69,7 @@ public class Pessoa {
         pessoa.append("Telefone: ").append(getTelefone()).append("\n");
         pessoa.append("Email: ").append(getEmail()).append("\n");
         pessoa.append("------------------------------------------\n");
-        return super.toString();
+
+        return pessoa.toString();
     }
 }
