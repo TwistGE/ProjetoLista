@@ -47,13 +47,27 @@ public class Funcoes {
         novaPessoa.setEndereco(sc.nextLine());
 
         System.out.println("Digite o CPF:");
-        novaPessoa.setCpf(sc.nextLine());
+        String cpf;
+        do {
+            cpf = sc.nextLine();
+            if (validaCPF(cpf)){
+                novaPessoa.setCpf(cpf);
+            } else System.out.println("Digite um cpf valido...\n");
+        }while (!validaCPF(cpf));
 
         System.out.println("Digite o telefone:");
         novaPessoa.setTelefone(sc.nextLine());
 
         System.out.println("Digite o email:");
-        novaPessoa.setEmail(sc.nextLine());
+        String email;
+        do {
+            email = sc.nextLine();
+            if (validaEmail(email)){
+                novaPessoa.setEmail(email);
+            }else System.out.println("Digite um email valido....\n");
+        }while(!validaEmail(email));
+
+        novaPessoa.setEmail(email);
         adicionarPessoas(novaPessoa);
     }
 
@@ -65,5 +79,18 @@ public class Funcoes {
         for(Pessoa pessoa : listaPessoas){
             System.out.println(pessoa.toString());
         }
+    }
+
+    public boolean validaCPF(String cpf){
+        for (Pessoa p : listaPessoas){
+            if (cpf.equals(p.getCpf())) return false;
+        }
+        return true;
+    }
+
+    public boolean validaEmail(String email){
+        if (email.contains("@") && email.contains(".") && !email.endsWith(".")){
+            return true;
+        }else return false;
     }
 }

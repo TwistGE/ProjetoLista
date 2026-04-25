@@ -15,6 +15,7 @@ public class AcaoLista {
             switch (opcao) {
                 case ADICIONAR:
                     System.out.println("Adicionado!");
+                    funcoes.execAdicionar();
                     break;
                 case EXCLUIR:
                     break;
