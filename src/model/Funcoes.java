@@ -1,6 +1,8 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Scanner;
 
 public class Funcoes {
@@ -65,5 +67,63 @@ public class Funcoes {
         for(Pessoa pessoa : listaPessoas){
             System.out.println(pessoa.toString());
         }
+    }
+
+    public void ExcluirPessoa(Pessoa pessoa){
+        //Antes, verificar se CPF Existe
+        listaPessoas.remove(pessoa);
+    }
+
+    public void ImprimirPessoa(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Digite o CPF desejado:");
+        String cpf = sc.nextLine();
+        //Valida CPF
+
+
+        for(Pessoa pessoa : listaPessoas){
+            if(pessoa.getCpf().equals(cpf)){
+                System.out.println(pessoa.toString());
+                break;
+            }
+        }
+    }
+
+    public void ordenarPessoas(){
+        Collections.sort(listaPessoas, Comparator.comparing(Pessoa::getNome));
+        System.out.println("List ordenada!!!!\n");
+    }
+
+    public void alterarPessoa(){
+        Scanner sc = new Scanner(System.in);
+        Pessoa pessoaEncontrada = new Pessoa();
+
+        System.out.println("Digite o CPF:");
+        String cpf = sc.nextLine();
+        //Valida o CPF
+
+        //Encontrar pessoa:
+        for(Pessoa pessoa:listaPessoas){
+            if(pessoa.getCpf().equals(cpf)){
+                pessoaEncontrada = pessoa;
+                break;
+            }
+        }
+
+        if(pessoaEncontrada == null){
+            System.out.println("PESSOA NAO ENCONTRADA!!!");
+        }else{
+            System.out.println("Campos a serem mudadados:");
+            System.out.println(pessoaEncontrada.toString());
+        }
+
+        System.out.println("Digite novo nome:");
+        String novoNome = sc.nextLine();
+
+        if(pessoaEncontrada.getNome().isBlank()){
+            
+        }
+
     }
 }
