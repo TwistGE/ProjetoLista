@@ -1,9 +1,12 @@
+import model.Funcoes;
+
 import java.util.Scanner;
 
 //TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 public class AcaoLista {
     public static void main(String[] args) {
+        Funcoes funcoes = new Funcoes();
         Opcoes opcao;
 
         do {
@@ -20,6 +23,7 @@ public class AcaoLista {
                 case IMPRIMIR:
                     break;
                 case IMPRIMIR_TODOS:
+                    funcoes.ImprimirTodos();
                     break;
                 case ORDENAR:
                     break;
