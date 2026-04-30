@@ -14,22 +14,27 @@ public class AcaoLista {
 
             switch (opcao) {
                 case ADICIONAR:
-                    System.out.println("Adicionado!");
                     funcoes.execAdicionar();
+                    System.out.println("Adicionado!");
                     break;
                 case EXCLUIR:
+                    funcoes.excluirPessoa();
                     break;
                 case ALTERAR:
+                    funcoes.alterarPessoa();
                     break;
                 case IMPRIMIR:
+                    funcoes.ImprimirPessoa();
                     break;
                 case IMPRIMIR_TODOS:
                     System.out.println("Imprimindo:");
-                    funcoes.ImprimirTodos();
+                    funcoes.imprimirTodos();
                     break;
                 case ORDENAR:
+                    funcoes.ordenarPessoas();
                     break;
                 case SAIR:
+                    System.out.println("FIM");
                     break;
                 default:
                     break;

@@ -49,13 +49,8 @@ public class Funcoes {
         novaPessoa.setEndereco(sc.nextLine());
 
         System.out.println("Digite o CPF:");
-        String cpf;
-        do {
-            cpf = sc.nextLine();
-            if (validaCPF(cpf)){
-                novaPessoa.setCpf(cpf);
-            } else System.out.println("Digite um cpf valido...\n");
-        }while (!validaCPF(cpf));
+        String cpf = sc.nextLine();
+        novaPessoa.setCpf(cpf);
 
         System.out.println("Digite o telefone:");
         novaPessoa.setTelefone(sc.nextLine());
@@ -77,23 +72,34 @@ public class Funcoes {
         listaPessoas.add(novaPessoa);
     }
 
-    public void ImprimirTodos(){
+    public void imprimirTodos(){
         for(Pessoa pessoa : listaPessoas){
             System.out.println(pessoa.toString());
         }
     }
 
-    public void ExcluirPessoa(Pessoa pessoa){
-        //Antes, verificar se CPF Existe
-        listaPessoas.remove(pessoa);
-    }
+    public void excluirPessoa(){
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Digite o CPF para exclusao:");
+        String cpf = sc.nextLine();
+
+            for(Pessoa pessoa : listaPessoas){
+                if(pessoa.getCpf().equals(cpf)){
+                    listaPessoas.remove(pessoa);
+                    System.out.println("Pessoa excluida com sucesso!");
+                    break;
+                }
+            }
+        }
+
 
     public void ImprimirPessoa(){
         Scanner sc = new Scanner(System.in);
 
         System.out.println("Digite o CPF desejado:");
         String cpf = sc.nextLine();
-        //Valida CPF
+        validaCPF(cpf);
 
 
         for(Pessoa pessoa : listaPessoas){
@@ -111,46 +117,97 @@ public class Funcoes {
 
     public void alterarPessoa(){
         Scanner sc = new Scanner(System.in);
-        Pessoa pessoaEncontrada = new Pessoa();
 
         System.out.println("Digite o CPF:");
         String cpf = sc.nextLine();
-        //Valida o CPF
+        validaCPF(cpf);
 
         //Encontrar pessoa:
         for(Pessoa pessoa:listaPessoas){
             if(pessoa.getCpf().equals(cpf)){
-                pessoaEncontrada = pessoa;
+                System.out.println("Campos a serem Mudados:");
+                System.out.println(pessoa.toString());
+
+                System.out.println("\nDigite o novo nome:");
+                String  novoNome = sc.nextLine();
+                if(!novoNome.equals("")){
+                    pessoa.setNome(novoNome);
+                }
+
+                System.out.println("Digite o novo endereco:");
+                String  novoEndereco = sc.nextLine();
+                if(!novoEndereco.equals("")){
+                    pessoa.setEndereco(novoEndereco);
+                }
+                System.out.println("Digite o novo email:");
+                String  novoEmail = sc.nextLine();
+                if(!novoEmail.equals("")){
+                    pessoa.setEmail(novoEmail);
+                }
+                System.out.println("Digite o novo telefone:");
+                String  novoTelefone = sc.nextLine();
+                if(!novoTelefone.equals("")){
+                    pessoa.setTelefone(novoTelefone);
+                }
+
+                System.out.println("Novos Dados:");
+                System.out.println("\n"+pessoa.toString());
+
                 break;
             }
         }
 
-        if(pessoaEncontrada == null){
-            System.out.println("PESSOA NAO ENCONTRADA!!!");
-        }else{
-            System.out.println("Campos a serem mudadados:");
-            System.out.println(pessoaEncontrada.toString());
-        }
 
-        System.out.println("Digite novo nome:");
-        String novoNome = sc.nextLine();
-
-        if(pessoaEncontrada.getNome().isBlank()){
-
-        }
 
     }
 
     public boolean validaCPF(String cpf){
         for (Pessoa p : listaPessoas){
-            if (cpf.equals(p.getCpf())) return false;
-        }
-        return true;
-    }
+            if (cpf.equals(p.getCpf()))
+                return false;
 
-    public boolean validaEmail(String email){
-        if (email.contains("@") && email.contains(".") && !email.endsWith(".")){
+        }
+            // CPF não encontrado. Oferece cadastro
+            Scanner sc = new Scanner(System.in);
+            System.out.println("CPF não encontrado na lista.");
+            System.out.println("Deseja cadastrar uma nova pessoa com este CPF? (s/n)");
+            String resposta = sc.nextLine().trim().toLowerCase();
+
+            if (!resposta.equals("s")) {
+                System.out.println("Operação cancelada.");
+                return false;
+            }
+
+            // Coleta os demais dados
+            Pessoa novaPessoa = new Pessoa();
+            novaPessoa.setCpf(cpf);
+
+            System.out.println("Digite o nome:");
+            novaPessoa.setNome(sc.nextLine());
+
+            System.out.println("Digite o endereço:");
+            novaPessoa.setEndereco(sc.nextLine());
+
+            System.out.println("Digite o telefone:");
+            novaPessoa.setTelefone(sc.nextLine());
+
+            System.out.println("Digite o e-mail:");
+            String email;
+            do {
+                email = sc.nextLine();
+                if (!validaEmail(email)) System.out.println("Digite um e-mail válido....\n");
+            } while (!validaEmail(email));
+            novaPessoa.setEmail(email);
+
+            listaPessoas.add(novaPessoa);
+            System.out.println("Pessoa cadastrada com sucesso!\n");
+            System.out.println("\n"+novaPessoa.toString());
             return true;
-        }else return false;
+        }
+
+    public boolean validaEmail(String email) {
+        if (email.contains("@") && email.contains(".") && !email.endsWith(".")) {
+            return true;
+        } else return false;
     }
 }
